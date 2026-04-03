@@ -1,0 +1,13 @@
+{
+  "ID": "POWERENCODER123456789ABCDEFG",
+  "ActionKeyword": "#",
+  "IsGlobal": false,
+  "Name": "PowerEncoder",
+  "Author": "pepster",
+  "Version": "1.0.0",
+  "Language": "csharp",
+  "Website": "https://github.com/pepster/PowerEncoder",
+  "ExecuteFileName": "PowerEncoder.dll",
+  "IcoPathDark": "Images/encoder.dark.png",
+  "IcoPathLight": "Images/encoder.light.png"
+}

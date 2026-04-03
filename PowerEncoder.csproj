@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
+        <Platforms>x64;ARM64</Platforms>
+        <PlatformTarget>$(Platform)</PlatformTarget>
+        <Nullable>enable</Nullable>
+        <AssemblyName>PowerEncoder</AssemblyName>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="./plugin.json" CopyToOutputDirectory="PreserveNewest" />
+        <None Include="./Images/encoder.dark.png" CopyToOutputDirectory="PreserveNewest" Link="Images\encoder.dark.png" />
+        <None Include="./Images/encoder.light.png" CopyToOutputDirectory="PreserveNewest" Link="Images\encoder.light.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Community.PowerToys.Run.Plugin.Dependencies" Version="0.83.0" />
+    </ItemGroup>
+    <Target Name="Movefiles" AfterTargets="Build">
+        <ItemGroup>
+            <MySourceFiles Include="./plugin.json" />
+            <MySourceFiles Include="$(OutputPath)PowerEncoder.dll" />
+            <ImagesFile Include="$(OutputPath)Images\*.*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(MySourceFiles)" DestinationFolder="./bin/output_$(Platform)/PowerEncoder" />
+        <Copy SourceFiles="@(ImagesFile)" DestinationFolder="./bin/output_$(Platform)/PowerEncoder/Images" />
+    </Target>
+    <Target Name="ZipOutput" AfterTargets="Pack">
+        <ZipDirectory SourceDirectory="./bin/output_$(Platform)" DestinationFile="./bin/PowerEncoder_$(Platform).zip" Overwrite="true" />
+    </Target>
+</Project>
